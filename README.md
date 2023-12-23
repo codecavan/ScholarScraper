@@ -4,18 +4,11 @@ Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
 
 **You can test on any user**
 
-# Requirements
- **pip install requests** 
+# How to Use 
 
- **pip install BeautifulSoup** 
+1) Installation:
+   pip install requests beautifulsoup4 parsel pandas
 
- **pip install Selector** 
-
- **pip install pandas** 
-
- **pip install parsel** 
-
- **pip install json** 
 
 # ScholarScraper
 

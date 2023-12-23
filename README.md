@@ -5,7 +5,7 @@ Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
 **You can test on any user**
 
 # Installation / Requirements
-pip install requests
+< **pip install requests** >
 
 < **pip install BeautifulSoup** >
 

@@ -1,4 +1,4 @@
-# Scrape-Google-Scholar-Using-Python
+# Scrape Google Scholar Using Python
 Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
 
 

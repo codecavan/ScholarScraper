@@ -7,15 +7,15 @@ Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
 # Installation / Requirements
 pip install requests
 
-< pip install BeautifulSoup >
+< **pip install BeautifulSoup** >
 
-< pip install Selector >
+< **pip install Selector** >
 
-< pip install pandas >
+< **pip install pandas** >
 
-pip install parsel
+< **pip install parsel** >
 
-pip install json
+< **pip install json** >
 
 
 # Introduction

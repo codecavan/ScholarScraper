@@ -22,8 +22,6 @@ Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
 Google Scholar data can be a great choice for businesses that specifically want to access quality researched based content available on the internet. 
 What this project does:
 
-
-# What is happening in the code?
 1) Existing code for BeautifulSoup
 2) Existing code to extract basic author information
 3) Printing basic author information
@@ -33,3 +31,4 @@ What this project does:
 7) New code to extract author information using parsel
 8) Convert data to DataFrames
 9) Save data to CSV
+

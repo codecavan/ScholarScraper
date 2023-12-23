@@ -23,6 +23,13 @@ Welcome to ScholarScraper! This Python script is a powerful web scraper tailored
 
 Google Scholar data can be a great choice for businesses that specifically want to access quality researched based content available on the internet. 
 
+# Key Features
+
+    Author Information: Retrieve basic details such as name, position, email, and published content.
+    Article Extraction: Utilize Parsel for efficient extraction of article details, including title, authors, publication information, and citation counts.
+    Citation Statistics: Collect citation statistics, h-index, i10-index, and a graphical representation of citations over the years.
+    Additional Author Details: Gather additional details like affiliation, email, website, interests, and a thumbnail image.
+    
 What this project does:
 
 1) Existing code for BeautifulSoup

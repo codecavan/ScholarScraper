@@ -18,3 +18,5 @@ pip install parsel
 pip install json
 
 
+# Introduction
+Google Scholar data can be a great choice for businesses that specifically want to access quality researched based content available on the internet. 

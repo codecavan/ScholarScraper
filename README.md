@@ -4,6 +4,13 @@ Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
 
 **You can test on any user**
 
+# ScholarScraper
+
+Welcome to ScholarScraper! This Python script is a powerful web scraper tailored to extract detailed information from a Google Scholar profile. Unlike other similar tools, ScholarScraper combines the capabilities of BeautifulSoup and Parsel libraries to provide comprehensive data on an author's profile, published articles, citation statistics, and more.
+
+Google Scholar data can be a great choice for businesses that specifically want to access quality researched based content available on the internet. 
+
+
 # How to Use 
 
 1) **Installation**:
@@ -25,11 +32,7 @@ Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
     The script outputs information about the author, articles, citation statistics, and additional author details.
     Generates two CSV files: articles.csv and cited_by.csv.
 
-# ScholarScraper
 
-Welcome to ScholarScraper! This Python script is a powerful web scraper tailored to extract detailed information from a Google Scholar profile. Unlike other similar tools, ScholarScraper combines the capabilities of BeautifulSoup and Parsel libraries to provide comprehensive data on an author's profile, published articles, citation statistics, and more.
-
-Google Scholar data can be a great choice for businesses that specifically want to access quality researched based content available on the internet. 
 
 # Key Features
 

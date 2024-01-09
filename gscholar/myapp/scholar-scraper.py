@@ -4,6 +4,7 @@ from parsel import Selector
 import pandas as pd
 import json
 
+
 def getAuthorProfileData():
     try:
         # Existing code for BeautifulSoup
@@ -18,9 +19,11 @@ def getAuthorProfileData():
         # Existing code to extract basic author information
         author_results = {}
         author_results['name'] = soup.select_one("#gsc_prf_in").get_text()
-        author_results['position'] = soup.select_one("#gsc_prf_inw+ .gsc_prf_il").text
+        author_results['position'] = soup.select_one(
+            "#gsc_prf_inw+ .gsc_prf_il").text
         author_results['email'] = soup.select_one("#gsc_prf_ivh").text
-        author_results['published_content'] = soup.select_one("#gsc_prf_int").text
+        author_results['published_content'] = soup.select_one(
+            "#gsc_prf_int").text
 
         # Printing basic author information
         print(f"Author Name: {author_results['name']}")
@@ -41,13 +44,17 @@ def getAuthorProfileData():
         }
         all_articles = []
         while True:
-            html = requests.get('https://scholar.google.com/citations', params=params, headers=headers, timeout=30)
+            html = requests.get('https://scholar.google.com/citations',
+                                params=params, headers=headers, timeout=30)
             selector = Selector(text=html.text)
             for index, article in enumerate(selector.css('.gsc_a_tr'), start=1):
                 article_title = article.css('.gsc_a_at::text').get()
-                article_link = f"https://scholar.google.com{article.css('.gsc_a_at::attr(href)').get()}"
-                article_authors = article.css('.gsc_a_at+ .gs_gray::text').get()
-                article_publication = article.css('.gs_gray+ .gs_gray::text').get()
+                article_link = f"https://scholar.google.com{
+                    article.css('.gsc_a_at::attr(href)').get()}"
+                article_authors = article.css(
+                    '.gsc_a_at+ .gs_gray::text').get()
+                article_publication = article.css(
+                    '.gs_gray+ .gs_gray::text').get()
                 cited_by_count = article.css('.gsc_a_ac::text').get()
                 publication_year = article.css('.gsc_a_hc::text').get()
                 all_articles.append({
@@ -81,13 +88,15 @@ def getAuthorProfileData():
         headers_cited_by = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
         }
-        html_cited_by = requests.get('https://scholar.google.com/citations', params=params_cited_by, headers=headers_cited_by, timeout=30)
+        html_cited_by = requests.get('https://scholar.google.com/citations',
+                                     params=params_cited_by, headers=headers_cited_by, timeout=30)
         selector_cited_by = Selector(text=html_cited_by.text)
         data_cited_by = {
             'cited_by': [],
             'graph': []
         }
-        since_year = selector_cited_by.css('.gsc_rsb_sth~ .gsc_rsb_sth+ .gsc_rsb_sth::text').get().lower().replace(' ', '_')
+        since_year = selector_cited_by.css(
+            '.gsc_rsb_sth~ .gsc_rsb_sth+ .gsc_rsb_sth::text').get().lower().replace(' ', '_')
         for cited_by_public_access in selector_cited_by.css('.gsc_rsb'):
             data_cited_by['cited_by'].append({
                 'citations_all': cited_by_public_access.css('tr:nth-child(1) .gsc_rsb_sc1+ .gsc_rsb_std::text').get(),
@@ -114,15 +123,22 @@ def getAuthorProfileData():
         headers_author_info = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
         }
-        html_author_info = requests.get('https://scholar.google.com/citations', params=params_author_info, headers=headers_author_info, timeout=30)
+        html_author_info = requests.get('https://scholar.google.com/citations',
+                                        params=params_author_info, headers=headers_author_info, timeout=30)
         selector_author_info = Selector(text=html_author_info.text)
         author_info = {}
-        author_info['name'] = selector_author_info.css('#gsc_prf_in::text').get()
-        author_info['affiliation'] = selector_author_info.css('#gsc_prf_inw+ .gsc_prf_il::text').get()
-        author_info['email'] = selector_author_info.css('#gsc_prf_inw+ .gsc_prf_il::text').get()
-        author_info['website'] = selector_author_info.css('.gsc_prf_ila::attr(href)').get()
-        author_info['interests'] = selector_author_info.css('#gsc_prf_int .gs_ibl::text').getall(),
-        author_info['thumbnail'] = selector_author_info.css('#gsc_prf_pup-img::attr(src)').get()
+        author_info['name'] = selector_author_info.css(
+            '#gsc_prf_in::text').get()
+        author_info['affiliation'] = selector_author_info.css(
+            '#gsc_prf_inw+ .gsc_prf_il::text').get()
+        author_info['email'] = selector_author_info.css(
+            '#gsc_prf_inw+ .gsc_prf_il::text').get()
+        author_info['website'] = selector_author_info.css(
+            '.gsc_prf_ila::attr(href)').get()
+        author_info['interests'] = selector_author_info.css(
+            '#gsc_prf_int .gs_ibl::text').getall(),
+        author_info['thumbnail'] = selector_author_info.css(
+            '#gsc_prf_pup-img::attr(src)').get()
         print(json.dumps(author_info, indent=2, ensure_ascii=False))
 
         # Convert data to DataFrames
@@ -130,10 +146,11 @@ def getAuthorProfileData():
         df_cited_by = pd.DataFrame(data_cited_by['cited_by'])
 
         # Save data to CSV
-        df_articles.to_csv('articles.csv', index=False)
-        df_cited_by.to_csv('cited_by.csv', index=False)
+        # df_articles.to_csv('articles.csv', index=False)
+        # df_cited_by.to_csv('cited_by.csv', index=False)
 
     except Exception as e:
         print(e)
+
 
 getAuthorProfileData()

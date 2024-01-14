@@ -1,7 +1,8 @@
 from django.shortcuts import render
-
-# Create your views here.
+from myapp.scraper.main import getAuthorProfileData
 
 
 def home(request):
-    return render(request, "home.html")
+    data = getAuthorProfileData()
+    print(data)
+    return render(request, "articles.html", {"articles": data})

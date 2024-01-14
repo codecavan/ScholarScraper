@@ -26,10 +26,10 @@ def getAuthorProfileData():
             "#gsc_prf_int").text
 
         # Printing basic author information
-        print(f"Author Name: {author_results['name']}")
-        print(f"Author Position: {author_results['position']}")
-        print(f"Author Email: {author_results['email']}")
-        print(f"Published Content: {author_results['published_content']}")
+        # print(f"Author Name: {author_results['name']}")
+        # print(f"Author Position: {author_results['position']}")
+        # print(f"Author Email: {author_results['email']}")
+        # print(f"Published Content: {author_results['published_content']}")
 
         # New code to extract articles using parsel
         params = {
@@ -73,12 +73,14 @@ def getAuthorProfileData():
                 params['cstart'] += 100
 
         # Printing information for each article
-        print("Articles:")
-        for i, article in enumerate(all_articles, start=1):
-            print(f"Article {i}:")
-            for key, value in article.items():
-                print(f"{key}: {value}")
-            print()
+        # print("Articles:")
+        # for i, article in enumerate(all_articles, start=1):
+        #     print(f"Article {i}:")
+        #     for key, value in article.items():
+        #         print(f"{key}: {value}")
+        #     print()
+
+        return all_articles
 
         # New code to extract cited by information using parsel
         params_cited_by = {
@@ -113,7 +115,7 @@ def getAuthorProfileData():
                 'year': graph_year.get(),
                 'value': int(graph_yaer_value.get())
             })
-        print(json.dumps(data_cited_by, indent=2, ensure_ascii=False))
+        # print(json.dumps(data_cited_by, indent=2, ensure_ascii=False))
 
         # New code to extract author information using parsel
         params_author_info = {
@@ -139,15 +141,17 @@ def getAuthorProfileData():
             '#gsc_prf_int .gs_ibl::text').getall(),
         author_info['thumbnail'] = selector_author_info.css(
             '#gsc_prf_pup-img::attr(src)').get()
-        print(json.dumps(author_info, indent=2, ensure_ascii=False))
+        # print(json.dumps(author_info, indent=2, ensure_ascii=False))
 
         # Convert data to DataFrames
         df_articles = pd.DataFrame(all_articles)
         df_cited_by = pd.DataFrame(data_cited_by['cited_by'])
 
         # Save data to CSV
-        # df_articles.to_csv('articles.csv', index=False)
-        # df_cited_by.to_csv('cited_by.csv', index=False)
+        data_json = df_articles.to_json()
+        # df_cited_by.to_json()
+
+        return data_json
 
     except Exception as e:
         print(e)

@@ -1,5 +1,5 @@
 # Scrape Google Scholar Using Python
-Scrape Google Scholar Using Python | Test User: T9RX2U8AAAAJ
+Scrape Google Scholar Using Python 
 
 
 **You can test on any user**
@@ -25,7 +25,6 @@ Google Scholar data can be a great choice for businesses that specifically want 
 
    **pip install parsel**
 
-   **pip install json**
 
 2) **Output**:
 

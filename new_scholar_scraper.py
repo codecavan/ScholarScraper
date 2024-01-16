@@ -96,7 +96,7 @@ def get_articles(user_id):
 
             articles.append({
                 'user_id': user_id,
-                'position': index,
+                'position': index + params['cstart'],
                 'title': article_title,
                 'link': article_link,
                 'authors': article_authors,
@@ -106,7 +106,9 @@ def get_articles(user_id):
             })
 
         if selector.css('.gsc_a_e').get():
-            articles.pop
+            if len(articles) > 1 and articles[-1]['position'] == params['cstart'] + 1:
+                articles.pop()
+
             break
 
         params['cstart'] += 100

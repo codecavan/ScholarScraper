@@ -1,18 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} Django App {% endblock %}</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">GScholar</a>
+    <nav class="navbar">
+      <a class="navbar-brand text-xl font-bold" href="#">GScholar</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -29,7 +26,7 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item text-red-600">
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">

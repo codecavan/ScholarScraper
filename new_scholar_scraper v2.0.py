@@ -85,8 +85,8 @@ def get_articles(user_id):
         # getting 0 - 100 articles
         for index, article in enumerate(selector.css('.gsc_a_tr'), start=1):
             article_title = article.css('.gsc_a_at::text').get()
-            article_link = f"{gscholar_url}{
-                article.css('.gsc_a_at::attr(href)').get()}"
+            article_link = f'''{gscholar_url}{
+                article.css('.gsc_a_at::attr(href)').get()}'''
             article_authors = article.css(
                 '.gsc_a_at+ .gs_gray::text').get()
             article_publication = article.css(

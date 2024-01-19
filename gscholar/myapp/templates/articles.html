@@ -19,19 +19,19 @@
     
     <ul class="flex flex-col gap-3 w-full max-w-lg">
         {% if articles %}
-        {% for article in articles %}
-        <li class="card w-full bg-base-100 shadow-xl">
-            <div class="card-body">
-                <h2 class="card-title">{{ article.title }}</h2>
-                <p>{{ article.authors }}</p>
-                <div class="card-actions justify-end">
-                    <a href="{{ article.link }}" target="_blank" class="btn btn-primary">Cite</a>
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-    {% else %}
-        <p>Empty.</p>
+            {% for article in articles %}
+                <li class="card w-full bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ article.title }}</h2>
+                        <p>{{ article.authors }}</p>
+                        <div class="card-actions justify-end">
+                            <a href="{{ article.link }}" target="_blank" class="btn btn-primary">Cite</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        {% else %}
+            <span class="text-center pt-4">No results.</span>
         {% endif %}
     </ul>
 </div>

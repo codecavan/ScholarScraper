@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from myapp.scraper.main import scraper
 
 
@@ -8,7 +8,8 @@ from myapp.scraper.main import scraper
 
 
 def home(request):
-    return render(request, "home.html")
+    response = redirect('/articles')
+    return response
 
 
 def articles(request):

@@ -2,7 +2,9 @@ from django.shortcuts import render
 from myapp.scraper.main import scraper
 
 
-# author_urls = ['https://scholar.google.com/citations?user=PT8wxO8AAAAJ&hl=en']
+# author_urls = ['https://scholar.google.com/citations?user=PT8wxO8AAAAJ&hl=en',
+#                'https://scholar.google.com/citations?user=T-CSbJgAAAAJ&hl=en&oi=hraa',
+#                'https://scholar.google.com/citations?user=2LlnnZUAAAAJ&hl=en&oi=ao']
 
 
 def home(request):

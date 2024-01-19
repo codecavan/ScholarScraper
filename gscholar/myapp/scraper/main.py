@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 from parsel import Selector
-import pandas as pd
 import re
 
 gscholar_url = "https://scholar.google.com"
@@ -11,11 +10,18 @@ user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 headers = {"User-Agent": user_agent}
 
 
-def process_author_profile(url):
+def extract_user_id(url):
+    pattern = r'user=([^&]+)'
+    match = re.search(pattern, url)
+
+    if match:
+        return match.group(1)
+
+
+def process_profile(url):
     try:
-        # New code to extract articles using parsel
         user_id = extract_user_id(url)
-        print("User ID is: " + user_id)
+        print("User ID: " + user_id)
 
         articles = get_articles(user_id)
         return articles
@@ -24,17 +30,7 @@ def process_author_profile(url):
         print(e)
 
 
-def extract_user_id(url):
-    pattern = r'user=([^&]+)'
-    match = re.search(pattern, url)
-
-    if match:
-        return match.group(1)
-
-    return None
-
-
-def get_author_profile_data(url):
+def get_profile_data(url):
     response = requests.get(url, headers=headers)
     # print(response.status_code)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -99,29 +95,15 @@ def get_articles(user_id):
         if selector.css('.gsc_a_e').get():
             if len(articles) > 1 and articles[-1]['position'] == params['cstart'] + 1:
                 articles.pop()
-
             break
-
         params['cstart'] += 100
 
     return articles
 
 
-# url_list = ['https://scholar.google.com/citations?user=PT8wxO8AAAAJ&hl=en',
-#             'https://scholar.google.com/citations?user=T-CSbJgAAAAJ&hl=en&oi=hraa', 'https://scholar.google.com/citations?user=2LlnnZUAAAAJ&hl=en&oi=ao']
-
-def main(urls):
+def scraper(urls):
     merged_articles = []
 
     for url in urls:
-        print('Processing: ', url)
-        author_articles = process_author_profile(url)
+        author_articles = process_profile(url)
         merged_articles += author_articles
-        print('Finished!'+'\n')
-
-    df_articles = pd.DataFrame(merged_articles)
-    df_articles.to_csv('articles.csv', index=False)
-
-
-if __name__ == "__main__":
-    main()

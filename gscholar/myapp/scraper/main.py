@@ -107,3 +107,5 @@ def scraper(urls):
     for url in urls:
         author_articles = process_profile(url)
         merged_articles += author_articles
+
+    return merged_articles

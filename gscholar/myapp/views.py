@@ -17,9 +17,9 @@ def articles(request):
     if query.strip() == '':
         return render(request, "articles.html", {"articles": []})
 
-    raw_urls = query.split(' ')
+    raw_urls = query.split(',')
     urls = [url.strip() for url in raw_urls]
 
-    print(urls)
     data = scraper(urls) if len(urls) > 0 else []
-    return render(request, "articles.html", {"articles": data})
+    print(data)
+    return render(request, "articles.html", {"query": query, "articles": data})

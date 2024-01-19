@@ -64,39 +64,43 @@ def get_articles(user_id):
 
     articles = []
 
-    while True:
-        html = requests.get(gscholar_citations_url,
-                            params=params, headers=headers, timeout=30)
-        selector = Selector(text=html.text)
+    try:
+        while True:
+            html = requests.get(gscholar_citations_url,
+                                params=params, headers=headers, timeout=30)
+            selector = Selector(text=html.text)
 
-        # getting 0 - 100 articles
-        for index, article in enumerate(selector.css('.gsc_a_tr'), start=1):
-            article_title = article.css('.gsc_a_at::text').get()
-            article_link = f'''{gscholar_url}{
-                article.css('.gsc_a_at::attr(href)').get()}'''
-            article_authors = article.css(
-                '.gsc_a_at+ .gs_gray::text').get()
-            article_publication = article.css(
-                '.gs_gray+ .gs_gray::text').get()
-            cited_by_count = article.css('.gsc_a_ac::text').get()
-            publication_year = article.css('.gsc_a_hc::text').get()
+            # getting 0 - 100 articles
+            for index, article in enumerate(selector.css('.gsc_a_tr'), start=1):
+                article_title = article.css('.gsc_a_at::text').get()
+                article_link = f'''{gscholar_url}{
+                    article.css('.gsc_a_at::attr(href)').get()}'''
+                article_authors = article.css(
+                    '.gsc_a_at+ .gs_gray::text').get()
+                article_publication = article.css(
+                    '.gs_gray+ .gs_gray::text').get()
+                cited_by_count = article.css('.gsc_a_ac::text').get()
+                publication_year = article.css('.gsc_a_hc::text').get()
 
-            articles.append({
-                'user_id': user_id,
-                'position': index + params['cstart'],
-                'title': article_title,
-                'link': article_link,
-                'authors': article_authors,
-                'publication': article_publication,
-                'publication_year': publication_year,
-                'cited_by_count': cited_by_count
-            })
+                articles.append({
+                    'user_id': user_id,
+                    'position': index + params['cstart'],
+                    'title': article_title,
+                    'link': article_link,
+                    'authors': article_authors,
+                    'publication': article_publication,
+                    'publication_year': publication_year,
+                    'cited_by_count': cited_by_count
+                })
 
-        if selector.css('.gsc_a_e').get():
-            if len(articles) > 1 and articles[-1]['position'] == params['cstart'] + 1:
-                articles.pop()
-            break
-        params['cstart'] += 100
+            if selector.css('.gsc_a_e').get():
+                if len(articles) > 1 and articles[-1]['position'] == params['cstart'] + 1:
+                    articles.pop()
+                break
+            params['cstart'] += 100
+
+    except Exception as e:
+        print(e)
 
     return articles
 

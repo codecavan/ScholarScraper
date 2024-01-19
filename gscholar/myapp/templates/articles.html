@@ -1,10 +1,31 @@
 {% extends "base.html" %} {% block content %}
+
+<form action="/articles" method="get">
+    <label class="form-control w-full max-w-xs">
+        <div class="label">
+            <span class="label-text">URLs</span>
+        </div>
+        <input type="url" name="urls" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+        <div class="label">
+            <span class="label-text-alt">Separate URLs spaces.</span>
+        </div>
+    </label>
+
+    <input class="btn" type="submit" value="Submit">
+</form>
+
 <h1>Articles</h1>
+
 <ul>
-    {% for article in articles %}
-        <li class="text-red-500">
-            {{ article.title }}: {{ article.authors }}
-        </li>
-    {% endfor %}
+    {% if articles %}
+        {% for article in articles %}
+            <li class="text-red-500">
+                {{ article.title }}: {{ article.authors }}
+            </li>
+        {% endfor %}
+    {% else %}
+        <p>Empty.</p>
+    {% endif %}
 </ul>
+
 {% endblock %}

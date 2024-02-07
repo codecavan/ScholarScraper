@@ -13,14 +13,15 @@ def home(request):
 
 
 def articles(request):
-    query = request.GET.get('urls', '')
+    urls_query = request.GET.get('urls', '')
+    search_query = request.GET.get('search', '')
 
-    if query.strip() == '':
+    if urls_query.strip() == '':
         return render(request, "articles.html", {"articles": []})
 
-    raw_urls = query.split(',')
+    raw_urls = urls_query.split(',')
     urls = [url.strip() for url in raw_urls]
 
-    data = scraper(urls) if len(urls) > 0 else []
+    data = scraper(urls, search_query) if len(urls) > 0 else []
     print(data)
-    return render(request, "articles.html", {"query": query, "articles": data})
+    return render(request, "articles.html", {"urls": urls_query, "search": search_query, "articles": data})

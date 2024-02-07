@@ -1,14 +1,21 @@
 {% extends "base.html" %} {% block content %}
 
-<form action="/articles" method="get" class="flex gap-3 w-full items-center justify-center">
+<form action="/articles" method="get" class="flex flex-col gap-3 w-full items-center justify-center">
     <label class="form-control w-full max-w-xl">
         <div class="label">
             <span class="label-text font-semibold text-lg">URLs</span>
         </div>
-        <input type="url" name="urls" placeholder="https://scholar.google.com/..." value="{{ query }}"" class="input input-bordered input-lg w-full" />
+        <input type="search" name="urls" placeholder="https://scholar.google.com/..." value="{{ urls }}"" class="input input-bordered input-lg w-full" />
         <div class="label">
             <span class="label-text-alt text-sm">Separate URLs with commas (,).</span>
         </div>
+    </label>
+
+    <label class="form-control w-full max-w-xl">
+        <div class="label">
+            <span class="label-text font-semibold text-lg">Search in articles</span>
+        </div>
+        <input type="search" name="search" placeholder="Charisma..." value="{{ search }}"" class="input input-bordered input-lg w-full" />
     </label>
 
     <input class="btn" type="submit" value="Submit">
@@ -35,5 +42,5 @@
         {% endif %}
     </ul>
 </div>
-    
-    {% endblock %}
+
+{% endblock %}

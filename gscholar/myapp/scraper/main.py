@@ -105,11 +105,30 @@ def get_articles(user_id):
     return articles
 
 
-def scraper(urls):
+def filter_search(articles, query):
+    query = query.strip().casefold()
+
+    if (query == ''):
+        return articles
+
+    filtered_articles = []
+
+    for article in articles:
+        title, authors, publication = article['title'], article['authors'], article['publication']
+
+        if (title != None and title.casefold().find(query) != -1 or authors != None and authors.casefold().find(query) != -1 or publication != None and publication.casefold().find(query) != -1):
+            filtered_articles.append(article)
+
+    return filtered_articles
+
+
+def scraper(urls, search_query):
     merged_articles = []
 
     for url in urls:
         author_articles = process_profile(url)
         merged_articles += author_articles
 
-    return merged_articles
+    filtered_articles = filter_search(merged_articles, search_query)
+
+    return filtered_articles
